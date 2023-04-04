@@ -6,6 +6,8 @@ document.getElementById('fees-form').addEventListener('submit', async (event) =>
     const to = document.getElementById('to').value;
   
     const feesList = await getFeesList(address, from, to);
+    console.log("feesList: ")
+    console.log(feesList)
     const totalFees = feesList.reduce((acc, fee) => acc + fee, 0);
   
     document.getElementById('total-fees').textContent = totalFees.toFixed(8) + ' ETH';
@@ -37,14 +39,16 @@ document.getElementById('fees-form').addEventListener('submit', async (event) =>
     }
   
     const feesList = data.result
-      .filter(tx => tx.timeStamp >= fromTimestamp && tx.timeStamp <= toTimestamp)
-      .map(tx => {
+    .filter(tx => tx.timeStamp >= fromTimestamp && tx.timeStamp <= toTimestamp)
+    .map(tx => {
         const gasUsed = BigInt(tx.gasUsed);
         const gasPrice = BigInt(tx.gasPrice);
         const feeInWei = gasUsed * gasPrice;
-        const feeInEth = Number(feeInWei / BigInt(10 ** 18));
+        const weiPerEth = BigInt(10 ** 18);
+        const feeInEth = Number(feeInWei / weiPerEth) + Number(feeInWei % weiPerEth) / 10 ** 18;
         return feeInEth;
-      });
+    });
+
   
     return feesList;
   }
