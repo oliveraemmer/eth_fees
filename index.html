@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethereum Fees Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Ethereum Fees Calculator</h1>
+  <form id="fees-form">
+    <label for="address">Ethereum Address:</label>
+    <input type="text" id="address" name="address" required>
+    <br>
+    <label for="from">From:</label>
+    <input type="date" id="from" name="from" required>
+    <label for="to">To:</label>
+    <input type="date" id="to" name="to" required>
+    <br>
+    <button type="submit">Calculate Fees</button>
+  </form>
+  <h2>Total Fees: <span id="total-fees">0</span> ETH</h2>
+  <h3>Fees List:</h3>
+  <ul id="fees-list"></ul>
+  <script src="app.js"></script>
+</body>
+</html>
